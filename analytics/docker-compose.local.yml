@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  analytics_local:
+    image: postgres:16
+    container_name: analytics_local_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    ports:
+      - "6666:5432"
+    volumes:
+      - pgdata_local:/var/lib/postgresql/data
+    networks:
+      - analytics_net
+
+volumes:
+  pgdata_local:     
+
+networks:
+  analytics_net:
